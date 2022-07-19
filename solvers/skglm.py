@@ -28,9 +28,7 @@ class Solver(BaseSolver):
         'https://arxiv.org/abs/2204.07826'
     ]
 
-    parameters = {
-        "solver": ["prox_newton", "cd"],
-        "cst_step_size": [True, False]}
+    parameters = {"solver": ["prox_newton", "cd"]}
 
     def skip(self, X, y, lmbd):
         if issparse(X):
@@ -68,8 +66,7 @@ class Solver(BaseSolver):
             if self.solver == 'prox_newton':
                 coef = prox_newton_solver(
                     self.X, self.y, self.datafit, self.penalty, w, Xw,
-                    max_iter=n_iter, tol=1e-12, verbose=0,
-                    cst_step_size=self.cst_step_size)[0]
+                    max_iter=n_iter, tol=1e-12, verbose=0)[0]
             else:
                 coef = cd_solver(
                     self.X, self.y, self.datafit, self.penalty, w, Xw, max_iter=n_iter,
